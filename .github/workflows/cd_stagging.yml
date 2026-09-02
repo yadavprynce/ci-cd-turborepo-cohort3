@@ -15,16 +15,15 @@ jobs:
 
                echo "${{secrets.SSH_PRIVATE_KEY}}" > ~/ssh_key
                chmod 600 ~/ssh_key
-               ssh -i ~/ssh_key -o StrictHostKeyChecking=no ubuntu@13.61.176.198 <<- 'EOF'
-                cd ci-cd-turborepo-cohort3 && git pull origin main
-                export PATH=/home/ubuntu/.nvm/versions/node/v24.20.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin && npm install -g pnpm
-                pnpm install
-                pnpm run build
-                pm2 restart http-server
-                pm2 restart nextapp
+               ssh -i ~/ssh_key -o StrictHostKeyChecking=no ubuntu@13.61.176.198 '
+                cd ci-cd-turborepo-cohort3 && git pull origin main &&
+                export PATH=/home/ubuntu/.nvm/versions/node/v24.20.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin && npm install -g pnpm &&
+                pnpm install &&
+                pnpm run build &&
+                pm2 restart http-server &&
+                pm2 restart nextapp &&
                 pm2 restart ws
-               EOF 
-
+                '
 
 
         
