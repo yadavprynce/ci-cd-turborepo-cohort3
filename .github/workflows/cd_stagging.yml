@@ -12,7 +12,7 @@ jobs:
         steps:
             - name: SSH into Server
               run: |
-               echo ${{secrets.SSH_PRIVATE_KEY}} > ~/ssh_key
+               echo "${{secrets.SSH_PRIVATE_KEY}}" > ~/ssh_key
                chmod 600 ~/ssh_key
                ssh -i ~/ssh_key ubuntu@13.61.176.198 << 'EOF'
                  cd ci-cd-turborepo-cohort3 && git pull
