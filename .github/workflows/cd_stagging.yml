@@ -16,6 +16,8 @@ jobs:
                chmod 600 ~/ssh_key
                ssh -i ~/ssh_key -o StrictHostKeyChecking=no ubuntu@13.61.176.198 << 'EOF'
                  cd ci-cd-turborepo-cohort3 && git pull origin main
+                 export PATH=/home/ubuntu/.nvm/versions/node/v26.8.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+                 npm install -g pnpm
                  pnpm install
                  pnpm run build
                  pm2 restart http-server
